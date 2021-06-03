@@ -1,5 +1,5 @@
 <?php
-require_once'dbconfig.php';
+require_once 'dbConfig.php';
 ?>
 <!doctype html>
 <html lang="en">
@@ -16,11 +16,11 @@ require_once'dbconfig.php';
 <body>
 <div id="page">
     <?php
-    require_once ("studentSideBar.php");
+    require_once("studentSideBar.php");
     ?>
     <div id="content">
         <?php
-          require_once ("findCurrentSemester.php");
+          require_once("findCurrentSemester.php");
         ?>
         <p> ترم : <span><?php  echo $semester ." " .date("Y"); ?></span></p>
 

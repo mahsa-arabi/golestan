@@ -14,7 +14,7 @@
 <body>
 <div id="page">
     <?php
-    require_once ("instructorSideBar.php");
+    require_once("studentSideBar.php");
     ?>
     <div id="content">
         <p id="welcome">به سامانه گلستان خوش آمدید</p>
