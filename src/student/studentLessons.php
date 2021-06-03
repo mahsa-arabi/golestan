@@ -1,5 +1,5 @@
 <?php
-require_once 'dbConfig.php';
+require_once '../dbConfig.php';
 ?>
 <!doctype html>
 <html lang="en">
@@ -9,24 +9,21 @@ require_once 'dbConfig.php';
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>گلستان</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../style.css">
     <link href="https://v1.fontapi.ir/css/Shabnam" rel="stylesheet">
     <style>
         input[type=submit]{
             color: lightpink !important;
             background-color: rebeccapurple !important;
             padding: 0.3rem !important;
-            margin-right: 1%!important;
-        }
-        input[type=submit].confirm{
-            margin: 2% 7.3% !important;
+            margin-right: 1%;
         }
         form{
             margin: 1% 1%;
         }
         table {
             border-collapse: collapse;
-            width: 85%;
+            width: 80%;
             margin-right: auto;
             margin-left:auto ;
         }
@@ -43,21 +40,22 @@ require_once 'dbConfig.php';
 <body>
 <div id="page">
     <?php
-    require_once("instructorSideBar.php");
+    require_once("studentSideBar.php");
     ?>
-    <div id="content" style="overflow-y: auto;">
-        <?php
-        require_once("enterGradeHeader.php");
-        ?>
-        <form method="post">
+    <div id="content" style="overflow-y: auto">
+            <?php
+            require_once("../utility/lessonsListHeader.php");
+            ?>
+        <div>
             <table>
                 <tr>
-                    <th>شماره دانشجو</th>
-                    <th>نام</th>
-                    <th>نمره</th>
+                    <th>کد درس</th>
+                    <th>نام درس</th>
+                    <th>تعداد واحد</th>
+                    <th>نام دپارتمان</th>
                 </tr>
                 <?php
-                $sql = "SELECT ID,name FROM student";
+                $sql = "SELECT course_id,title,credits,dept_name FROM course";
                 $query = $conn->prepare($sql);
                 $query->execute();
                 $results = $query->fetchAll(PDO::FETCH_OBJ);
@@ -67,20 +65,18 @@ require_once 'dbConfig.php';
                     foreach ($results as $result) {
                         ?>
                         <tr>
-                            <td> <?php echo htmlentities($result->ID) ?></td>
-                            <td> <?php echo htmlentities($result->name) ?></td>
-                            <td><input type="number" name="grade" max=20 min=0></td>
+                            <td> <?php echo htmlentities($result->course_id) ?></td>
+                            <td> <?php echo htmlentities($result->title) ?></td>
+                            <td> <?php echo htmlentities($result->credits) ?></td>
+                            <td> <?php echo htmlentities($result->dept_name) ?></td>
                         </tr>
                         <?php
                         $id++;
                     }}
                 ?>
             </table>
-            <div>
-                <input class="confirm" type="submit" value="ثبت اطلاعات">
-            </div>
+        </div>
 
-        </form>
 
     </div>
 </div>

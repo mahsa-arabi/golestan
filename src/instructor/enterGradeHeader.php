@@ -2,7 +2,7 @@
     <form class="form">
         <div id="content">
             <?php
-            require_once("findCurrentSemester.php");
+            require_once("../utility/findCurrentSemester.php");
             ?>
             <p> ترم : <span><?php  echo $semester ." " .date("Y"); ?></span></p>
         </div>

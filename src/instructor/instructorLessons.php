@@ -1,5 +1,5 @@
 <?php
-require_once 'dbConfig.php';
+require_once '../dbConfig.php';
 ?>
 <!doctype html>
 <html lang="en">
@@ -9,7 +9,7 @@ require_once 'dbConfig.php';
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>گلستان</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../style.css">
     <link href="https://v1.fontapi.ir/css/Shabnam" rel="stylesheet">
     <style>
         input[type=submit]{
@@ -44,7 +44,7 @@ require_once 'dbConfig.php';
     ?>
     <div id="content" style="overflow-y: auto;">
         <?php
-        require_once("lessonsListHeader.php");
+        require_once("../utility/lessonsListHeader.php");
         ?>
         <table>
             <tr>

@@ -17,6 +17,59 @@ body {
     height: 100%;
     margin: 0;
 }
+#table{
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+    width: 50%;
+    height: 50%;
+    background-color: slateblue;
+    color: lightpink;
+    border: #bbb 3px;
+    margin-right: 25%;
+    margin-top: 15%;
+}
+#table1{
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+    width: 90%;
+    height: 80%;
+    background-color: slateblue;
+    color: lightpink;
+    border: #bbb 3px;
+    margin-right: 5%;
+    margin-top: 15%;
+}
+#tableheader{
+    display: flex;
+    flex-direction:row;
+    justify-content: space-around;
+    width: 100%;
+    height: 40px;
+    align-items: center;
+}
+#item{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    width: 80%;
+    height: 30%;
+}
+#tablebody{
+    display: flex;
+    flex-direction:column;
+    justify-content: space-between;
+    width: 90%;
+    margin-top: 4%;
+    padding:4% 4% 4% 4% ;
+    background-color: #bbb;
+    color: slateblue;
+    align-items: center;
+}
 #page {
     display: flex;
     height: 100%;
@@ -29,6 +82,12 @@ body {
     align-items: baseline;
     margin: 1rem;
     font-size: large;
+}
+#karnamehead{
+    margin-top: 5%;
+    margin-right: 5%;
+    border: #bbb;
+    padding: 3% 3% 3% 3%;
 }
 
 #sideBar {
