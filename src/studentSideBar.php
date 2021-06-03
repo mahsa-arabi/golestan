@@ -17,9 +17,12 @@
     </div>
     <hr/>
     <ul>
-        <li><a href="#">مشاهده درس های گذرانده</a></li>
+        <li><a href="studentLessons.php">مشاهده درس های گذرانده</a></li>
+        <hr/>
         <li><a href="#">انتخاب واحد</a></li>
+        <hr/>
         <li><a href="karname.php">مشاهده کارنامه</a></li>
+        <hr/>
     </ul>
 </div>
 </body>

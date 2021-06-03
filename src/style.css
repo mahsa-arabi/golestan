@@ -6,6 +6,7 @@
     font-family:Shabnam;
     /*font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;*/
     text-align: right!important;
+    overflow-y: hidden;
 }
 
 html {
@@ -36,9 +37,6 @@ body {
     width: 20%;
     background-color: slateblue;
     color: lightpink;
-}
-hr{
-    border-top: 3px solid #bbb;
 }
 ul{
     list-style-type: none;
