@@ -16,7 +16,7 @@ require_once'dbconfig.php';
 <body>
 <div id="page">
     <?php
-    require_once ("stdentSideBar.php");
+    require_once ("studentSideBar.php");
     ?>
     <div id="content">
         <?php
