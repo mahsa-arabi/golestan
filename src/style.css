@@ -50,6 +50,14 @@ body {
     height: 40px;
     align-items: center;
 }
+#item{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    width: 80%;
+    height: 30%;
+}
 #tablebody{
     display: flex;
     flex-direction:column;
