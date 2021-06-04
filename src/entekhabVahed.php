@@ -19,8 +19,7 @@ require_once 'dbConfig.php';
     require_once("studentSideBar.php");
     ?>
     <div id="content">
-
-<div id="table1">
+    <div id="table1">
 <div id="tableheader">
     
     <span>تعداد واحد انتخاب شده:  5</span>
@@ -29,6 +28,37 @@ require_once 'dbConfig.php';
     
 
 
+</div>
+<div id="tableheader">
+    
+        <span>نام درس</span>
+    
+    
+        <span>نام استاد</span>
+    
+        <span>تعداد واحد</span>
+        <span>دانشکده</span>
+    
+    <span>زمان </span>
+    <span>ظرفیت</span>
+    
+    <span>حذف</span>
+
+    
+</div>
+
+<div id="tablebody">
+    سلام
+
+</div>
+</div>
+
+
+<div id="table1">
+<div id="tableheader">
+    
+    <span>درس های ارایه شده</span>
+  
 </div>
 <div id="tableheader">
     
