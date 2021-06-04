@@ -1,5 +1,7 @@
 <?php
 require_once '../dbConfig.php';
+
+session_start();
 ?>
 <!doctype html>
 <html lang="en">
@@ -26,14 +28,11 @@ require_once '../dbConfig.php';
 
 <div id="table">
 <div id="tablebody">
-<span>:نام </span>
-    
-    
-    <span>:نام خانوادگی</span>
-
-    <span>:دانشکده</span>
-    <span>ترم:<?php  echo $semester ." " .date("Y"); ?></span>
-<span>:حقوق </span>
+    <span>ترم : <?php  echo $semester ." " .date("Y"); ?></span>
+    <span> نام : <?php echo $_SESSION['name'] ?></span>
+    <span> آیدی : <?php echo $_SESSION['ID'] ?></span>
+    <span> نام دپارتمان : <?php echo $_SESSION['dept_name'] ?></span>
+    <span> حقوق : <?php echo $_SESSION['salary'] ?></span>
 
 </div>
 </div>

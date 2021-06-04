@@ -29,6 +29,7 @@ if (isset($_POST['stu_submit'])) {
         form{
             overflow-y: auto;
             margin: auto;
+            width: 50%;
         }
         .error {
             background: #F2DEDE;
@@ -58,7 +59,7 @@ if (isset($_POST['stu_submit'])) {
     ?>
 <form method="post" action="">
     <div id="item">
-    <label > شماره دانشجویی :  </label>
+    <label > آیدی :  </label>
     <input type="text" name="ID">
     </div>
    <div id="item">

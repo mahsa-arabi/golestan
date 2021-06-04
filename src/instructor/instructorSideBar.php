@@ -12,7 +12,7 @@
 <body>
 <div id="sideBar">
     <div id="headerContainer">
-        <p>نام</p>
+        <p> <?php echo $_SESSION['name'] ?></p>
         <button><a href="informationInstru.php">مشاهده اطلاعات</a></button>
     </div>
     <hr/>

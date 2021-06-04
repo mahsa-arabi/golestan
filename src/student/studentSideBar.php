@@ -1,3 +1,4 @@
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -12,7 +13,7 @@
 <body>
 <div id="sideBar">
     <div id="headerContainer">
-        <p>نام</p>
+        <p> <?php echo $_SESSION['name'] ?></p>
         <button><a href="informationStudent.php">مشاهده اطلاعات</a></button>
     </div>
     <hr/>
