@@ -1,4 +1,9 @@
+<?php
+session_start();
 
+if (isset($_SESSION['ID']) && isset($_SESSION['name'])) {
+
+?>
 <!doctype html>
 <html lang="en">
 <head>
@@ -17,7 +22,7 @@
     require_once("studentSideBar.php");
     ?>
     <div id="content">
-        <p id="welcome">به سامانه گلستان خوش آمدید</p>
+        <p id="welcome"> به سامانه گلستان خوش آمدید</p>
     </div>
 </div>
 
@@ -25,3 +30,9 @@
 
 
 </body>
+    <?php
+}else{
+    header("Location: ../index.php");
+    exit();
+}
+?>

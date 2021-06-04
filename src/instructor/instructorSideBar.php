@@ -23,6 +23,13 @@
         <hr/>
         <li><a href="enterGrades.php">وارد کردن نمره برای دانشجویان درس های ارائه داده شده</a></li>
         <hr/>
+        <div style="position: relative">
+            <div style="position: fixed; bottom: 0; width: 20%">
+                <hr/>
+                <li><a href="karname.php">خروج</a></li>
+            </div>
+
+        </div>
     </ul>
 </div>
 </body>
