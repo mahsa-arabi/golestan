@@ -26,7 +26,7 @@
         <div style="position: relative">
             <div style="position: fixed; bottom: 0; width: 20%">
                 <hr/>
-                <li><a href="karname.php">خروج</a></li>
+                <li><a href="../logout.php">خروج</a></li>
             </div>
 
         </div>
