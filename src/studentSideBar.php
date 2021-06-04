@@ -13,7 +13,7 @@
 <div id="sideBar">
     <div id="headerContainer">
         <p>نام</p>
-        <button>مشاهده اطلاعات</button>
+        <button><a href="informationStudent.php">مشاهده اطلاعات</a></button>
     </div>
     <hr/>
     <ul>

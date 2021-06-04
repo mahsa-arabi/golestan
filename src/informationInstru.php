@@ -1,5 +1,3 @@
-
-
 <?php
 require_once 'dbConfig.php';
 ?>
@@ -16,8 +14,35 @@ require_once 'dbConfig.php';
 </head>
 
 <body>
-<?php
-    require_once("studentPage.php");
+<div id="page">
+    <?php
+    require_once("studentSideBar.php");
     ?>
+    <div id="content">
+        <?php
+          require_once("findCurrentSemester.php");
+        ?>
+       
+
+<div id="table">
+<div id="tablebody">
+<span>:نام </span>
+    
+    
+    <span>:نام خانوادگی</span>
+
+    <span>:دانشکده</span>
+    <span>ترم:<?php  echo $semester ." " .date("Y"); ?></span>
+<span>:حقوق </span>
+
+</div>
+</div>
+
+    </div>
+</div>
+
+
+
+
+
 </body>
-</html> 
