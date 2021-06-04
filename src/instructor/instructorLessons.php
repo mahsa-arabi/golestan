@@ -47,6 +47,15 @@ session_start();
     <div id="content" style="overflow-y: auto;">
         <?php
         require_once("instrLessonsListHeader.php");
+
+        if (isset($_POST['semester_confirm'])) {
+        if (!empty($_POST['yearSelect'])) {
+            $_SESSION['year'] = $_POST['yearSelect'];
+        }
+        if (!empty($_POST['semesterSelect'])) {
+            $_SESSION['semester'] = $_POST['semesterSelect'];
+        }
+
         ?>
         <table>
             <tr>
@@ -56,7 +65,11 @@ session_start();
                 <th>نام دپارتمان</th>
             </tr>
             <?php
-            $sql = "SELECT course_id,title,credits,dept_name FROM course";
+            $ID=$_SESSION['ID'];
+            $year=$_SESSION['year'];
+            $semester=$_SESSION['semester'];
+            $sql = "SELECT course_id,title,credits,dept_name FROM course natural join teaches
+                        WHERE ID='$ID' AND year='$year' AND semester='$semester'";
             $query = $conn->prepare($sql);
             $query->execute();
             $results = $query->fetchAll(PDO::FETCH_OBJ);
@@ -76,8 +89,8 @@ session_start();
                 }}
             ?>
         </table>
-
     </div>
+  <?php } ?>
 </div>
 
 
