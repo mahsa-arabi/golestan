@@ -1,5 +1,6 @@
 <?php
 require_once '../dbConfig.php';
+session_start();
 ?>
 <!doctype html>
 <html lang="en">
@@ -44,8 +45,6 @@ require_once '../dbConfig.php';
 <div id="page">
     <?php
     require_once("instructorSideBar.php");
-
-    session_start();
     ?>
     <div id="content" style="overflow-y: auto;">
         <?php

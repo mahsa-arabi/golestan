@@ -46,7 +46,10 @@ session_start();
     ?>
     <div id="content" style="overflow-y: auto">
             <?php
-            require_once("../utility/lessonsListHeader.php");
+            require_once("stuLessonsListHeader.php");
+            if (isset($_POST['semester_confirm'])) {
+//                var_dump($_SESSION['semester']);
+//                exit();
             ?>
         <div>
             <table>
@@ -79,8 +82,9 @@ session_start();
             </table>
         </div>
 
-
+       <?php } ?>
     </div>
+
 </div>
 
 

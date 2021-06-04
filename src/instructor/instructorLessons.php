@@ -46,7 +46,7 @@ session_start();
     ?>
     <div id="content" style="overflow-y: auto;">
         <?php
-        require_once("../utility/lessonsListHeader.php");
+        require_once("instrLessonsListHeader.php");
         ?>
         <table>
             <tr>
