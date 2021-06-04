@@ -1,0 +1,128 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    direction: rtl;
+    font-family:Shabnam;
+    /*font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;*/
+    text-align: right!important;
+}
+
+html {
+    height: 100%;
+}
+
+body {
+    height: 100%;
+    margin: 0;
+}
+#table{
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+    width: 50%;
+    height: 50%;
+    background-color: slateblue;
+    color: lightpink;
+    border: #bbb 3px;
+    margin-right: 25%;
+    margin-top: 15%;
+}
+#table1{
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+    width: 90%;
+    height: 80%;
+    background-color: slateblue;
+    color: lightpink;
+    border: #bbb 3px;
+    margin-right: 5%;
+    margin-top: 15%;
+}
+#tableheader{
+    display: flex;
+    flex-direction:row;
+    justify-content: space-around;
+    width: 100%;
+    height: 40px;
+    align-items: center;
+}
+#tablebody{
+    display: flex;
+    flex-direction:column;
+    justify-content: space-between;
+    width: 90%;
+    padding:4% 4% 4% 4% ;
+    background-color: #bbb;
+    color: slateblue;
+    align-items: center;
+}
+#page {
+    display: flex;
+    height: 100%;
+    font-size: 1.5vw !important;
+
+    /* calculate the height. Header is 30px */
+}
+#headerContainer{
+    display: flex;
+    justify-content: space-around;
+    align-items: baseline;
+    margin: 1rem;
+    font-size: large;
+}
+#karnamehead{
+    margin-top: 5%;
+    margin-right: 5%;
+    border: #bbb;
+    padding: 3% 3% 3% 3%;
+}
+
+#sideBar {
+    display: flex;
+    flex-direction: column;
+    width: 20%;
+    background-color: slateblue;
+    color: lightpink;
+}
+hr{
+    border-top: 3px solid #bbb;
+}
+ul{
+    list-style-type: none;
+}
+li{
+    margin: 1rem;
+}
+#content {
+    background-color: lightpink;
+    flex: 1 0 auto;
+    color: slateblue;
+    /* enable grow, disable shrink */
+}
+#welcome{
+    text-align: center;
+    margin: 20% 30% 0 0!important;
+    font-size: 2vw;
+}
+
+a:link{
+    text-decoration: none;
+    color: lightpink;
+}
+a:visited{
+    text-decoration: none;
+    color: lightpink;
+}
+a:hover{
+    text-decoration: none;
+    color: lightpink;
+}
+button{
+    color: lightpink;
+    background-color: rebeccapurple;
+    padding: 0.5rem !important;
+}
