@@ -1,5 +1,9 @@
 <?php
-require_once 'dbConfig.php';
+if (isset($_POST['stu_submit'])) {
+    require_once ('stuLogin.php');
+}elseif (isset($_POST['instr_submit'])){
+    require_once('instrLogin.php');
+}
 ?>
 <!doctype html>
 <html lang="en">
@@ -52,7 +56,7 @@ require_once 'dbConfig.php';
     <?php
     }
     ?>
-<form method="post" action="student/stuLogin.php">
+<form method="post" action="">
     <div id="item">
     <label > شماره دانشجویی :  </label>
     <input type="text" name="ID">
@@ -62,8 +66,8 @@ require_once 'dbConfig.php';
     <input type="text" name="name">
    </div>
    <div id="item">
-   <input type="submit" value="ورود دانشجو">
-<!--    <input type="submit" id="instr_submit" value="ورود استاد">-->
+   <input type="submit" name="stu_submit" value="ورود دانشجو">
+    <input type="submit" name="instr_submit"  value="ورود استاد">
    </div>
 
 </form>

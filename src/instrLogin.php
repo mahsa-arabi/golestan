@@ -1,9 +1,10 @@
 <?php
 session_start();
-require_once ('../dbConfig.php');
+require_once('dbConfig.php');
 
 if (isset($_POST['ID']) && isset($_POST['name'])) {
-    function validate($data){
+    function validate($data)
+    {
         $data = trim($data);
         $data = stripslashes($data);
         $data = htmlspecialchars($data);
@@ -14,13 +15,13 @@ if (isset($_POST['ID']) && isset($_POST['name'])) {
     $name = validate($_POST['name']);
 
     if (empty($ID)) {
-        header("Location: ../index.php?error=id is required");
+        header("Location: index.php?error=id is required");
         exit();
-    }else if(empty($name)){
-        header("Location: ../index.php?error=name is required");
+    } else if (empty($name)) {
+        header("Location: index.php?error=name is required");
         exit();
-    }else{
-        $sql = "SELECT * FROM student WHERE ID='$ID' AND name='$name'";
+    } else {
+        $sql = "SELECT * FROM instructor WHERE ID='$ID' AND name='$name'";
         $query = $conn->prepare($sql);
         $query->execute();
         $result = $query->fetchAll(PDO::FETCH_OBJ);
@@ -29,20 +30,22 @@ if (isset($_POST['ID']) && isset($_POST['name'])) {
                 $_SESSION['ID'] = htmlentities($result[0]->ID);
                 $_SESSION['name'] = htmlentities($result[0]->name);
                 $_SESSION['dept_name'] = htmlentities($result[0]->dept_name);
-                $_SESSION['tot_cred'] = htmlentities($result[0]->tot_cred);
-                header("Location: studentPage.php");
+                $_SESSION['salary'] = htmlentities($result[0]->salary);
+                header("Location: instructor/instructorPage.php");
                 exit();
-            }else{
-                header("Location: ../index.php?error=Incorrect ID or name");
+            } else {
+                header("Location: index.php?error=Incorrect ID or name");
                 exit();
             }
-        }else{
-            header("Location: ../index.php?error=Incorrect ID or name");
+        } else {
+            header("Location: index.php?error=Incorrect ID or name");
             exit();
         }
     }
 
-}else{
-    header("Location: ../index.php");
+} else {
+    header("Location: index.php");
     exit();
 }
+
+
