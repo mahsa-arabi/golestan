@@ -48,8 +48,13 @@ session_start();
             <?php
             require_once("stuLessonsListHeader.php");
             if (isset($_POST['semester_confirm'])) {
-//                var_dump($_SESSION['semester']);
-//                exit();
+                if (!empty($_POST['yearSelect'])){
+                    $_SESSION['year']=$_POST['yearSelect'];
+                }
+                if (!empty($_POST['semesterSelect'])){
+                    $_SESSION['semester']=$_POST['semesterSelect'];
+                }
+
             ?>
         <div>
             <table>
@@ -58,9 +63,14 @@ session_start();
                     <th>نام درس</th>
                     <th>تعداد واحد</th>
                     <th>نام دپارتمان</th>
+                    <th>نمره</th>
                 </tr>
                 <?php
-                $sql = "SELECT course_id,title,credits,dept_name FROM course";
+                $ID=$_SESSION['ID'];
+                $year=$_SESSION['year'];
+                $semester=$_SESSION['semester'];
+                $sql = "SELECT course_id,title,credits,dept_name,grade FROM course natural join takes
+                        WHERE ID='$ID' AND year='$year' AND semester='$semester'";
                 $query = $conn->prepare($sql);
                 $query->execute();
                 $results = $query->fetchAll(PDO::FETCH_OBJ);
@@ -74,6 +84,7 @@ session_start();
                             <td> <?php echo htmlentities($result->title) ?></td>
                             <td> <?php echo htmlentities($result->credits) ?></td>
                             <td> <?php echo htmlentities($result->dept_name) ?></td>
+                            <td> <?php echo htmlentities($result->grade) ?></td>
                         </tr>
                         <?php
                         $id++;
