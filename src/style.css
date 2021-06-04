@@ -64,7 +64,6 @@ body {
     display: flex;
     height: 100%;
     font-size: 1.5vw !important;
-
     /* calculate the height. Header is 30px */
 }
 #headerContainer{
