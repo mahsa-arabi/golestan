@@ -10,5 +10,6 @@ if (3<= intval(date("m")) && intval(date("m")) <=5){
 }else{
     $semester=null;
 }
-
+  $_SESSION['semester']=$semester;
+  $_SESSION['year']=date("Y");
 ?>

@@ -19,7 +19,7 @@ session_start();
             padding: 0.3rem !important;
             margin-right: 1%!important;
         }
-        input[type=submit].confirm{
+        input[type=submit].grades_confirm,input[type=submit].grade_confirm{
             margin: 2% 7.3% !important;
         }
         form{
@@ -49,6 +49,12 @@ session_start();
     <div id="content" style="overflow-y: auto;">
         <?php
         require_once("enterGradeHeader.php");
+
+        if (isset($_POST['course_confirm'])) {
+        if (!empty($_POST['courseSelect'])) {
+            $_SESSION['course_id'] = $_POST['courseSelect'];
+        }
+
         ?>
         <form method="post">
             <table>
@@ -58,7 +64,11 @@ session_start();
                     <th>نمره</th>
                 </tr>
                 <?php
-                $sql = "SELECT ID,name FROM student";
+                $course_id = $_SESSION['course_id'];
+                $semester = $_SESSION['semester'];
+                $year = $_SESSION['year'];
+                $sql = "SELECT ID,name FROM student natural join takes WHERE course_id='$course_id' 
+                                                 AND semester='$semester' AND year='$year'";
                 $query = $conn->prepare($sql);
                 $query->execute();
                 $results = $query->fetchAll(PDO::FETCH_OBJ);
@@ -68,9 +78,19 @@ session_start();
                     foreach ($results as $result) {
                         ?>
                         <tr>
+                            <form method="post">
                             <td> <?php echo htmlentities($result->ID) ?></td>
                             <td> <?php echo htmlentities($result->name) ?></td>
-                            <td><input type="number" name="grade" max=20 min=0></td>
+
+                                <td><input type="text" name="grade" maxlength=2 required></td>
+                                <td>
+                                    <?php
+                                    $id=htmlentities($result->ID);
+                                    ?>
+
+                                    <input class="grade_confirm" type="submit" value="ثبت">
+                                </td>
+                            </form>
                         </tr>
                         <?php
                         $id++;
@@ -78,15 +98,12 @@ session_start();
                 ?>
             </table>
             <div>
-                <input class="confirm" type="submit" value="ثبت اطلاعات">
+                <input class="grades_confirm" type="submit" value="ثبت اطلاعات">
             </div>
 
-        </form>
-
+<?php } ?>
     </div>
 </div>
-
-
 
 
 

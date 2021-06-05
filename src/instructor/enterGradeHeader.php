@@ -1,5 +1,5 @@
 <div>
-    <form class="form">
+    <form class="form" method="post">
         <div id="content">
             <?php
             require_once("../utility/findCurrentSemester.php");
@@ -7,9 +7,10 @@
             <p> ترم : <span><?php  echo $semester ." " .date("Y"); ?></span></p>
         </div>
         <label for="classes">کلاس : </label>
-        <select name="class" id="semester">
+        <select name="courseSelect">
             <?php
-            $sql = "SELECT course_id FROM course";
+            $ID = $_SESSION['ID'];
+            $sql = "SELECT course_id FROM course natural join teaches WHERE ID='$ID'";
             $query = $conn->prepare($sql);
             $query->execute();
             $results = $query->fetchAll(PDO::FETCH_OBJ);
@@ -25,7 +26,7 @@
             ?>
         </select>
 
-        <input type="submit" value="تایید">
+        <input type="submit" name="course_confirm" value="تایید">
     </form>
     <hr/>
 </div>

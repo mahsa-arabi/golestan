@@ -83,13 +83,6 @@ body {
     margin: 1rem;
     font-size: large;
 }
-#karnamehead{
-    margin-top: 5%;
-    margin-right: 5%;
-    border: #bbb;
-    padding: 3% 3% 3% 3%;
-}
-
 #sideBar {
     display: flex;
     flex-direction: column;
