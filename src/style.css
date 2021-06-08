@@ -41,15 +41,15 @@ body {
     color: lightpink;
     border: #bbb 3px;
     margin-right: 5%;
-    margin-top: 15%;
+    margin-top:5%;
 }
 #tableheader{
-    display: flex;
-    flex-direction:row;
-    justify-content: space-around;
+    background-color: slateblue;
+    color: lightpink;
     width: 100%;
-    height: 40px;
+    height: 60px;
     align-items: center;
+    padding-top: 25px;
 }
 #item{
     display: flex;
@@ -59,21 +59,13 @@ body {
     width: 80%;
     height: 30%;
 }
-#tablebody{
-    display: flex;
-    flex-direction:column;
-    justify-content: space-between;
-    width: 90%;
-    margin-top: 4%;
-    padding:4% 4% 4% 4% ;
-    background-color: #bbb;
-    color: slateblue;
-    align-items: center;
-}
+
+
 #page {
     display: flex;
     height: 100%;
     font-size: 1.5vw !important;
+    overflow:scroll;
     /* calculate the height. Header is 30px */
 }
 #headerContainer{
@@ -97,6 +89,8 @@ li{
     margin: 1rem;
 }
 #content {
+    display: flex;
+    flex-direction: column;
     background-color: lightpink;
     flex: 1 0 auto;
     color: slateblue;
