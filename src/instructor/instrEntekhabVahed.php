@@ -44,10 +44,12 @@ session_start();
                 $query->execute();
                 echo "<script>alert('درس های خواسته شده با موفقیت به لیست درس های این ترم شما اضافه شد');</script>";
                 echo "<script>window.location.href='instructorPage.php'</script>";
+                $_SESSION['item']=[];
 
             }else{
                 echo "<script>alert('شما احتمالا این درس را قبلا برداشته اید');</script>";
                 echo "<script>window.location.href='instructorPage.php'</script>";
+                $_SESSION['item']=[];
             }
 
         }
@@ -114,6 +116,7 @@ session_start();
         <div class="table">
             <table id="mytable">
                 <thead>
+                <th>آیدی درس</th>
                 <th>نام درس</th>
                 <th>تعداد واحد</th>
                 <th>دانشکده</th>
@@ -134,6 +137,9 @@ session_start();
                             foreach ($results as $result) {
                                 ?>
                                 <tr>
+                                    <td>
+                                        <?php echo $result['course_id']; ?>
+                                    </td>
                                     <td>
                                         <?php echo $result['title']; ?>
                                     </td>
@@ -165,6 +171,7 @@ session_start();
         <div class="table">
             <table id="mytable">
                 <thead>
+                <th>آیدی درس</th>
                 <th>نام درس</th>
                 <th>تعداد واحد</th>
                 <th>دانشکده</th>
@@ -183,6 +190,9 @@ session_start();
                     foreach ($results as $result) {
                         ?>
                         <tr>
+                            <td>
+                                <?php echo $result['course_id']; ?>
+                            </td>
                             <td>
                                 <?php echo $result['title']; ?>
                             </td>

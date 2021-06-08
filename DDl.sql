@@ -239,6 +239,7 @@ INSERT INTO `section` (`course_id`, `sec_id`, `semester`, `year`, `building`, `r
 INSERT INTO `section` (`course_id`, `sec_id`, `semester`, `year`, `building`, `room_number`, `time_slot_id`) VALUES ('BIO-101', '1', 'Summer', '2021', 'Taylor', '3128', 'A');
 INSERT INTO `section` (`course_id`, `sec_id`, `semester`, `year`, `building`, `room_number`, `time_slot_id`) VALUES ('PHY-101', '1', 'Summer', '2021', 'Packard', '101', 'A');
 INSERT INTO `section` (`course_id`, `sec_id`, `semester`, `year`, `building`, `room_number`, `time_slot_id`) VALUES ('EE-181', '1', 'Summer', '2021', 'Watson', '120', 'A');
+INSERT INTO `section` (`course_id`, `sec_id`, `semester`, `year`, `building`, `room_number`, `time_slot_id`) VALUES ('BIO-301', '1', 'Summer', '2021', 'Watson', '120', 'A');
 INSERT INTO `teaches` (`ID`, `course_id`, `sec_id`, `semester`, `year`) VALUES ('10101', 'BIO-101', '1', 'Summer', '2021');
 INSERT INTO `teaches` (`ID`, `course_id`, `sec_id`, `semester`, `year`) VALUES ('10101', 'FIN-201', '1', 'Summer', '2021');
 INSERT INTO `takes` (`ID`, `course_id`, `sec_id`, `semester`, `year`, `grade`) VALUES ('76543', 'BIO-101', '1', 'Summer', '2021', '');
@@ -246,3 +247,4 @@ INSERT INTO `takes` (`ID`, `course_id`, `sec_id`, `semester`, `year`, `grade`) V
 INSERT INTO `takes` (`ID`, `course_id`, `sec_id`, `semester`, `year`, `grade`) VALUES ('00128', 'BIO-101', '1', 'Summer', '2021', '');
 INSERT INTO `takes` (`ID`, `course_id`, `sec_id`, `semester`, `year`, `grade`) VALUES ('00128', 'FIN-201', '1', 'Summer', '2021', '');
 INSERT INTO `takes` (`ID`, `course_id`, `sec_id`, `semester`, `year`, `grade`) VALUES ('76543', 'FIN-201', '1', 'Summer', '2021', '');
+

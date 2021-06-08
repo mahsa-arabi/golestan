@@ -33,27 +33,59 @@ session_start();
             $query1->execute();
             $results = $query1->fetchAll(PDO::FETCH_OBJ);
             if ($query1->rowCount() === 0) {
-                $sql = 'INSERT INTO `takes` (`ID`, `course_id`, `sec_id`, `semester`, `year`,`grade`) VALUES
-                                                                                      (:id, :c_id, :s_id,:semester,:year,:grade);';
-                $query = $conn->prepare($sql);
-                $grade = '';
-                $query->bindParam(':id', $id, PDO::PARAM_STR);
-                $query->bindParam(':c_id', $c_id, PDO::PARAM_STR);
-                $query->bindParam(':s_id', $s_id, PDO::PARAM_STR);
-                $query->bindParam(':semester', $semester, PDO::PARAM_STR);
-                $query->bindParam(':year', $year, PDO::PARAM_STR);
-                $query->bindParam(':grade', $grade, PDO::PARAM_STR);
-                $query->execute();
-                echo "<script>alert('درس های خواسته شده با موفقیت به لیست درس های این ترم شما اضافه شد');</script>";
-                echo "<script>window.location.href='studentPage.php'</script>";
 
-            }else{
-                echo "<script>alert('شما احتمالا این درس را قبلا برداشته اید');</script>";
-                echo "<script>window.location.href='studentPage.php'</script>";
+                $sql2 = "SELECT prereq_id FROM prereq WHERE course_id='$c_id'";
+                $query2 = $conn->prepare($sql2);
+                $query2->execute();
+                $results2 = $query2->fetchAll(PDO::FETCH_OBJ);
+                $isPassed = false;
+                if($query2->rowCount() > 0){
+                    $sql3 = "SELECT course_id FROM takes WHERE ID='$id' AND grade<>''";
+                    $query3 = $conn->prepare($sql3);
+                    $query3->execute();
+                    $results3 = $query3->fetchAll(PDO::FETCH_OBJ);
+                    foreach ($results3 as $result3){
+                            if ($result3->course_id === $c_id) {
+                                $isPassed = true;
+                            }
+
+                        }
+                    }else{
+                        $isPassed=true;
+                    }
+
+                    if ($isPassed) {
+                        $sql = 'INSERT INTO `takes` (`ID`, `course_id`, `sec_id`, `semester`, `year`,`grade`) VALUES
+                                                                                      (:id, :c_id, :s_id,:semester,:year,:grade);';
+                        $query = $conn->prepare($sql);
+                        $grade = '';
+                        $query->bindParam(':id', $id, PDO::PARAM_STR);
+                        $query->bindParam(':c_id', $c_id, PDO::PARAM_STR);
+                        $query->bindParam(':s_id', $s_id, PDO::PARAM_STR);
+                        $query->bindParam(':semester', $semester, PDO::PARAM_STR);
+                        $query->bindParam(':year', $year, PDO::PARAM_STR);
+                        $query->bindParam(':grade', $grade, PDO::PARAM_STR);
+                        $query->execute();
+                        echo "<script>alert('درس های خواسته شده با موفقیت به لیست درس های این ترم شما اضافه شد');</script>";
+                        echo "<script>window.location.href='studentPage.php'</script>";
+                        $_SESSION['item']=[];
+
+                    } else {
+                        echo "<script>alert('پیش نیاز درس خواسته شده را قبلا نگذرانده اید');</script>";
+                        echo "<script>window.location.href='studentPage.php'</script>";
+                        $_SESSION['item']=[];
+                    }
+
+
+                }else {
+                    echo "<script>alert('شما احتمالا این درس را قبلا برداشته اید');</script>";
+                    echo "<script>window.location.href='studentPage.php'</script>";
+                $_SESSION['item']=[];
+                }
             }
 
+
         }
-    }
     function setSelected($Selected)
     {
 
@@ -67,8 +99,7 @@ session_start();
                         for ($i = 0; $i < $n; $i++) {
                             foreach ($deleted as $d) {
                                 if ($added[$i] === $d) {
-                                    array_splice($added, $i, 1);
-                                    $i++;
+                                    array_slice($added, $i, 1);
                                 }
                             }
                         }
@@ -116,6 +147,7 @@ session_start();
         <div class="table">
             <table id="mytable">
                 <thead>
+                <th>آیدی درس</th>
                 <th>نام درس</th>
                 <th>تعداد واحد</th>
                 <th>دانشکده</th>
@@ -124,7 +156,6 @@ session_start();
                 <tbody>
                 <form method="POST">
                     <?php
-
                     $_SESSION['item'] = setSelected($_SESSION['item']);
                     foreach ($_SESSION['item'] as $id) {
 
@@ -136,6 +167,9 @@ session_start();
                             foreach ($results as $result) {
                                 ?>
                                 <tr>
+                                    <td>
+                                        <?php echo $result['course_id']; ?>
+                                    </td>
                                     <td>
                                         <?php echo $result['title']; ?>
                                     </td>
@@ -167,6 +201,7 @@ session_start();
         <div class="table">
             <table id="mytable">
                 <thead>
+                <th>آیدی درس</th>
                 <th>نام درس</th>
                 <th>تعداد واحد</th>
                 <th>دانشکده</th>
@@ -185,6 +220,9 @@ session_start();
                     foreach ($results as $result) {
                         ?>
                         <tr>
+                            <td>
+                                <?php echo $result['course_id']; ?>
+                            </td>
                             <td>
                                 <?php echo $result['title']; ?>
                             </td>
