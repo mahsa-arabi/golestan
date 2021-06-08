@@ -19,7 +19,7 @@
     <ul>
         <li><a href="instructorLessons.php">مشاهده درس های ارائه شده</a></li>
         <hr/>
-        <li><a href="curses.php">انتخاب واحد برای ارائه</a></li>
+        <li><a href="instrEntekhabVahed.php">انتخاب واحد برای ارائه</a></li>
         <hr/>
         <li><a href="enterGrades.php">وارد کردن نمره برای دانشجویان درس های ارائه داده شده</a></li>
         <hr/>

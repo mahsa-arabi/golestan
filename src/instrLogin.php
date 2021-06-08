@@ -31,6 +31,7 @@ if (isset($_POST['ID']) && isset($_POST['name'])) {
                 $_SESSION['name'] = htmlentities($result[0]->name);
                 $_SESSION['dept_name'] = htmlentities($result[0]->dept_name);
                 $_SESSION['salary'] = htmlentities($result[0]->salary);
+                $_SESSION['item']=[];
                 header("Location: instructor/instructorPage.php");
                 exit();
             } else {
