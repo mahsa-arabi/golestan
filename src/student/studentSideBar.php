@@ -20,7 +20,7 @@
     <ul>
         <li><a href="studentLessons.php">مشاهده درس های گذرانده</a></li>
         <hr/>
-        <li><a href="entekhabVahed.php">انتخاب واحد</a></li>
+        <li><a href="EntekhabVahed2.php">انتخاب واحد</a></li>
         <hr/>
         <li><a href="karname.php">مشاهده کارنامه</a></li>
         <hr/>
