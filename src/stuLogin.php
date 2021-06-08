@@ -31,6 +31,7 @@ require_once('dbConfig.php');
                     $_SESSION['name'] = htmlentities($result[0]->name);
                     $_SESSION['dept_name'] = htmlentities($result[0]->dept_name);
                     $_SESSION['tot_cred'] = htmlentities($result[0]->tot_cred);
+                    $_SESSION['item']=[];
                     header("Location: student/studentPage.php");
                     exit();
                 } else {
