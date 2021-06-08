@@ -146,8 +146,9 @@ session_start();
                 </thead>
                 <tbody>
                 <?php
-               $semester = "Spring";
-               $year = "2017";
+                require_once("../utility/findCurrentSemester.php");
+                $semester =$_SESSION['semester'];
+                $year=$_SESSION['year'];
                $sql = "SELECT title,credits,dept_name,course_id FROM course WHERE course_id IN
   (SELECT course_id FROM teaches WHERE semester='$semester' AND year='$year' )";
                $query = $conn->query($sql);
