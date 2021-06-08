@@ -1,6 +1,30 @@
 <?php
 require_once '../dbConfig.php';
 session_start();
+if (isset($_POST['grades_confirm'])) {
+//    for ($i=0;$i<=$_SESSION['count'];$i++)
+//      var_dump($_POST['grade'.$i]);
+//    var_dump($_SESSION['grade-array']);
+    $results=$_SESSION['grade-array'];
+    $i=0;
+    $grade = $_POST['grade'.$i];
+    $semester=$_SESSION['semester'];
+    $year=$_SESSION['year'];
+    $course_id=$_SESSION['course_id'];
+    $ID="";
+foreach ($results as $result) {
+    $grade = $_POST['grade'.$i];
+    $ID=htmlentities($result->ID);
+    $sql2 = "UPDATE `takes` SET `grade` ='$grade' WHERE `takes`.`ID` = '$ID' AND `takes`.`course_id` = '$course_id' AND `takes`.`semester` = '$semester' AND
+                                          CONCAT(`takes`.`year`) = '$year';";
+
+    $query2 = $conn->prepare($sql2);
+    $query2->execute();
+
+    $i++;
+}
+
+}
 ?>
 <!doctype html>
 <html lang="en">
@@ -67,40 +91,52 @@ session_start();
                 $course_id = $_SESSION['course_id'];
                 $semester = $_SESSION['semester'];
                 $year = $_SESSION['year'];
-                $sql = "SELECT ID,name FROM student natural join takes WHERE course_id='$course_id' 
+                $teachesID = $_SESSION['ID'];
+                $sql0 = "SELECT ID FROM teaches WHERE ID='$teachesID' AND course_id='$course_id'
                                                  AND semester='$semester' AND year='$year'";
-                $query = $conn->prepare($sql);
-                $query->execute();
-                $results = $query->fetchAll(PDO::FETCH_OBJ);
+                $query0 = $conn->prepare($sql0);
+                $query0->execute();
+                $results = $query0->fetchAll(PDO::FETCH_OBJ);
                 $id = 1;
-                if($query->rowCount() > 0){
+                if($query0->rowCount() > 0){
+                    $sql = "SELECT S.ID,S.name FROM takes natural join student as S WHERE course_id='$course_id'
+                                                 AND semester='$semester' AND year='$year' AND grade=''";
 
-                    foreach ($results as $result) {
-                        ?>
-                        <tr>
-                            <form method="post">
-                            <td> <?php echo htmlentities($result->ID) ?></td>
-                            <td> <?php echo htmlentities($result->name) ?></td>
+                    $query = $conn->prepare($sql);
+                    $query->execute();
+                    $results = $query->fetchAll(PDO::FETCH_OBJ);
+                    $id = 1;
+                    $temp=0;
+                    $_SESSION['grade-array']=$results;
+                    if($query->rowCount() > 0){
+                        foreach ($results as $result) {
+                            ?>
+                            <tr>
 
-                                <td><input type="text" name="grade" maxlength=2 required></td>
-                                <td>
-                                    <?php
-                                    $id=htmlentities($result->ID);
-                                    ?>
+                                    <td> <?php echo htmlentities($result->ID) ?></td>
+                                    <td> <?php echo htmlentities($result->name) ?></td>
 
-                                    <input class="grade_confirm" type="submit" value="ثبت">
-                                </td>
-                            </form>
-                        </tr>
-                        <?php
-                        $id++;
-                    }}
+                                    <td><input type="text" name="<?php echo "grade".$temp?>" maxlength=2 required></td>
+                                <?php $temp++; ?>
+                                    <td>
+                                        <?php
+                                        $id=htmlentities($result->ID);
+                                        ?>
+                                    </td>
+
+                            </tr>
+                            <?php
+                            $id++;
+                        } }else{ echo "دانشجویی در این کلاس نیست یا عمل نمره دهی را قبلا انجام داده اید"; ?> <br><br> <?php }
+                    $_SESSION['count']=$temp-1;
+                }else{ echo "دانشجویی در این کلاس نیست یا عمل نمره دهی را قبلا انجام داده اید"; ?> <br><br> <?php }
                 ?>
             </table>
             <div>
-                <input class="grades_confirm" type="submit" value="ثبت اطلاعات">
+                <input class="grades_confirm" name="grades_confirm" type="submit" value="ثبت اطلاعات"
+                       onClick="return confirm('آیا از ثبت اطلاعات مطمئن هستید؟');">
             </div>
-
+        </form>
 <?php } ?>
     </div>
 </div>
