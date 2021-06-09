@@ -15,40 +15,42 @@ session_start();
     <link href="https://v1.fontapi.ir/css/Shabnam" rel="stylesheet">
     <?php
     require_once('stuStyle.php');
-    $item=[];
-    function save($item,$semester,$year,$conn){
-        $id=$_SESSION['ID'];
+    // $item=[];
+    // function save($item,$semester,$year,$conn){
+    //     $id=$_SESSION['ID'];
        
-        foreach($item as $c_id){
-            $sql = 'INSERT INTO takes VALUES(:id,:c_id,:s_id,:semester,:year)';
-            $statement = $conn->prepare($sql);
+    //     foreach($item as $c_id){
+    //         $sql = 'INSERT INTO takes VALUES(:id,:c_id,:s_id,:semester,:year)';
+    //         $statement = $conn->prepare($sql);
 
-            $statement->execute([
-                ':id' => $id,
-                ':c_id'=>$c_id,
-                ':s_id'=>$c_id,
-                ':semester'=>$semester,
-                ':year'=>$year
-            ]);
-        }
-    }
+    //         $statement->execute([
+    //             ':id' => $id,
+    //             ':c_id'=>$c_id,
+    //             ':s_id'=>$c_id,
+    //             ':semester'=>$semester,
+    //             ':year'=>$year
+    //         ]);
+    //     }
+    // }
         
     function setSelected($Selected){
-      
-            $added = $_POST['course'];
+        if($Selected==null)$Selected=[];
+      if(isset($_POST['course'])){
+        $added = $_POST['course'];
+        if(isset($_POST['delete'])){
             $deleted = $_POST['delete'];
-     if (!empty($added)) {
-        if (!empty($deleted)) {
-            foreach ($added as $s) {
-                 foreach ($deleted as $d) {
-                    if ($s == $d) {
-                        unset($s);
-                    }
-                }
-            }
+            if (!empty($added)) {
+               if (!empty($deleted)) {
+                   foreach ($added as $s) {
+                        foreach ($deleted as $d) {
+                           if ($s == $d) {
+                               unset($s);
+                           }
+                       }
         }
-                 
-             
+      }
+            }
+        }   
          $Selected= $Selected + $added;
         return $Selected + $added;
              
@@ -95,7 +97,9 @@ session_start();
                 <tbody>
                 <form method="POST">
                 <?php
+                if($item==null){$item=[];}
                 $item=setSelected($item);
+                if($item)
                  foreach ($item as $id) {
 
                     $sql = "SELECT title,credits,dept_name,course_id FROM course WHERE course_id='$id'";
@@ -177,8 +181,8 @@ session_start();
             </table>
         </div>
         <div style="display: flex; flex-direction:row; padding-bottom:6%;margin: 2% 4% 2%;">
-            <input id="save" name="submit" type="submit" value="اعمال تغییرات">
-            <button id="save" onclick=<?php save($item,$semester,$year,$conn) ?>>ذخیره</button>
+            <input id="save" name="submit"  type="submit" value="اعمال تغییرات">
+            <button id="save" >ذخیره</button>
             
         </div>
     </form>
