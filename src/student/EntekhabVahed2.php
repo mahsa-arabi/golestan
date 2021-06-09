@@ -15,23 +15,23 @@ session_start();
     <link href="https://v1.fontapi.ir/css/Shabnam" rel="stylesheet">
     <?php
     require_once('stuStyle.php');
-    // $item=[];
-    // function save($item,$semester,$year,$conn){
-    //     $id=$_SESSION['ID'];
+   
+    function save($item,$semester,$year,$conn){
+        $id=$_SESSION['ID'];
        
-    //     foreach($item as $c_id){
-    //         $sql = 'INSERT INTO takes VALUES(:id,:c_id,:s_id,:semester,:year)';
-    //         $statement = $conn->prepare($sql);
+        foreach($item as $c_id){
+            $sql = 'INSERT INTO takes VALUES(:id,:c_id,:s_id,:semester,:year)';
+            $statement = $conn->prepare($sql);
 
-    //         $statement->execute([
-    //             ':id' => $id,
-    //             ':c_id'=>$c_id,
-    //             ':s_id'=>$c_id,
-    //             ':semester'=>$semester,
-    //             ':year'=>$year
-    //         ]);
-    //     }
-    // }
+            $statement->execute([
+                ':id' => $id,
+                ':c_id'=>$c_id,
+                ':s_id'=>$c_id,
+                ':semester'=>$semester,
+                ':year'=>$year
+            ]);
+        }
+    }
         
     function setSelected($Selected){
         
@@ -184,7 +184,7 @@ session_start();
         </div>
         <div style="display: flex; flex-direction:row; padding-bottom:6%;margin: 2% 4% 2%;">
             <input id="save" name="submit"  type="submit" value="اعمال تغییرات">
-            <button id="save" >ذخیره</button>
+            <button id="save" onClick=<?php save($_SESSION['item'],$semester,$year,$conn) ?> >ذخیره</button>
             
         </div>
     </form>
