@@ -15,6 +15,57 @@ session_start();
     <link href="https://v1.fontapi.ir/css/Shabnam" rel="stylesheet">
     <?php
     require_once('stuStyle.php');
+    $item=[];
+    function save($item,$semester,$year,$conn){
+        $id=$_SESSION['ID'];
+       
+        foreach($item as $c_id){
+            $sql = 'INSERT INTO takes VALUES(:id,:c_id,:s_id,:semester,:year)';
+            $statement = $conn->prepare($sql);
+
+            $statement->execute([
+                ':id' => $id,
+                ':c_id'=>$c_id,
+                ':s_id'=>$c_id,
+                ':semester'=>$semester,
+                ':year'=>$year
+            ]);
+        }
+    }
+        
+    function setSelected($Selected){
+      
+            $added = $_POST['course'];
+            $deleted = $_POST['delete'];
+     if (!empty($added)) {
+        if (!empty($deleted)) {
+            foreach ($added as $s) {
+                 foreach ($deleted as $d) {
+                    if ($s == $d) {
+                        unset($s);
+                    }
+                }
+            }
+        }
+                 
+             
+         $Selected= $Selected + $added;
+        return $Selected + $added;
+             
+    }
+     else{
+         if (isset($_POST['delete'])&&!empty($deleted)&&!empty($Selected)) {
+             foreach ($Selected as $s) {
+                 foreach ($deleted as $d) {
+                     if ($s == $d) {
+                         unset($s);
+                     }
+                 }
+             }
+         }
+         return $Selected;
+     }
+ }
     ?>
     <style>
         .table {
@@ -33,7 +84,6 @@ session_start();
     require_once("studentSideBar.php");
     ?>
     <div id="content"  style="overflow-y: auto">
-
         <div class="table">
             <table id="mytable">
                 <thead>
@@ -43,37 +93,39 @@ session_start();
                 <th>حذف</th>
                 </thead>
                 <tbody>
+                <form method="POST">
                 <?php
-                $sql = "SELECT title,credits,dept_name FROM course";
-                $query = $conn->prepare($sql);
-              $query->execute();
-                $results = $query->fetchAll(PDO::FETCH_OBJ);
+                $item=setSelected($item);
+                 foreach ($item as $id) {
 
-
-                $id = 1;
-                if ($query->rowCount() > 0) {
-
+                    $sql = "SELECT title,credits,dept_name,course_id FROM course WHERE course_id='$id'";
+                    $query = $conn->query($sql);
+                    $results = $query->fetchAll(PDO::FETCH_ASSOC);
+                    if ($results) {
+                       
                     foreach ($results as $result) {
                         ?>
                         <tr>
-                            <td>
-                                <?php echo htmlentities($result->title) ?>
+                        <td>
+                                <?php echo $result['title']; ?>
                             </td>
                             <td>
-                                <?php echo htmlentities($result->credits) ?>
+                                <?php echo $result['credits']; ?>
                             </td>
                             <td>
-                                <?php echo htmlentities($result->dept_name) ?>
+                                <?php echo $result['dept_name']; ?>
                             </td>
 
-                            <td><a href="index.php?del=<?php echo htmlentities($result->id); ?>">
-                                    <button onClick="return confirm('آیا حذف انجام شود');"></button>
-                                </a></td>
+                            <td>
+                                    <button onClick="return confirm('آیا حذف انجام شود');">
+                                    <input type="checkbox" name='delete[]' value=<?php echo $result['course_id']; ?>>
+                                    </button>
+                                </td>
                         </tr>
                         <?php
-                        $id++;
+                       
                     }
-                }
+                }}
                 ?>
                 </tbody>
             </table>
@@ -90,34 +142,34 @@ session_start();
                 </thead>
                 <tbody>
                 <?php
-                $sql = "SELECT title,credits,dept_name,course_id FROM course";
-                $query = $conn->prepare($sql);
-                $query->execute();
-                $results = $query->fetchAll(PDO::FETCH_OBJ);
-
-
-                $id = 1;
-                if ($query->rowCount() > 0) {
-
+               $semester = "Spring";
+               $year = "2017";
+               $sql = "SELECT title,credits,dept_name,course_id FROM course WHERE course_id IN
+  (SELECT course_id FROM teaches WHERE semester='$semester' AND year='$year' )";
+               $query = $conn->query($sql);
+               $results = $query->fetchAll(PDO::FETCH_ASSOC);
+               if ($results) {
                     foreach ($results as $result) {
                         ?>
                         <tr>
                             <td>
-                                <?php echo htmlentities($result->title) ?>
+                                <?php echo $result['title']; ?>
                             </td>
                             <td>
-                                <?php echo htmlentities($result->credits) ?>
+                                <?php echo $result['credits']; ?>
                             </td>
                             <td>
-                                <?php echo htmlentities($result->dept_name) ?>
+                                <?php echo $result['dept_name']; ?>
                             </td>
 
-                            <td><a href="index.php?del=<?php echo htmlentities($result->id); ?>">
-                                    <button></button>
-                                </a></td>
+                            <td>
+                                    <button>
+                                    <input type="checkbox" name='course[]' value=<?php echo $result['course_id']; ?>>
+                                    </button>
+                            </td>
                         </tr>
                         <?php
-                        $id++;
+                       
                     }
                 }
                 ?>
@@ -125,10 +177,11 @@ session_start();
             </table>
         </div>
         <div style="display: flex; flex-direction:row; padding-bottom:6%;margin: 2% 4% 2%;">
-            <input id="save" type="submit" value="اعمال تغییرات" >
-            <button id="save" onclick="">ذخیره</button>
+            <input id="save" name="submit" type="submit" value="اعمال تغییرات">
+            <button id="save" onclick=<?php save($item,$semester,$year,$conn) ?>>ذخیره</button>
+            
         </div>
-
+    </form>
     </div>
 </div>
 </body>
